@@ -1,0 +1,10 @@
+Pon aquí las fotos de Miguel con ESTOS nombres exactos (en minúsculas):
+
+  portada.jpg    -> la foto grande de arriba (vertical u horizontal, mínimo 1600 px de ancho)
+  miguel.jpg     -> la foto de "Hola, soy Miguel" (mínimo 1000 px de ancho)
+  compartir.jpg  -> la imagen que sale al compartir el enlace por WhatsApp (1200 x 630 px)
+
+Consejo: pesa cada foto en https://squoosh.app antes de subirla (que pese menos de 400 KB).
+
+Cuando estén las fotos, abre index.html y borra los textos entre [corchetes]
+que dicen "[Foto ...]".

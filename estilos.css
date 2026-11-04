@@ -1,0 +1,191 @@
+/* =========================================================
+   Web de Miguel Ángel · EMERGO
+   Colores: Fondo #101513 · Profundo #1E3B3A · Piedra #A7B0AC
+            Hueso #F3F0EA · Brasa #FF5A26 · Brasa oscura #C23E12
+   Letras:  Anton (títulos) + Archivo (texto)
+   ========================================================= */
+
+:root {
+  --fondo: #101513;
+  --profundo: #1E3B3A;
+  --piedra: #A7B0AC;
+  --hueso: #F3F0EA;
+  --brasa: #FF5A26;
+  --brasa-oscura: #C23E12;
+  --gris-texto: #4F5753;
+  --linea: #3A4340;
+  --caja: #18201E;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--hueso);
+  font-family: 'Archivo', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--brasa); }
+a:hover { color: #FF7A4F; }
+p { margin: 0; }
+h1, h2, h3, h4 { margin: 0; }
+img { max-width: 100%; display: block; }
+
+/* ---------- Estructura ---------- */
+.contenedor { max-width: 760px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+.seccion { padding-top: 48px; padding-bottom: 72px; }
+.seccion-56 { padding-top: 56px; padding-bottom: 56px; }
+.seccion-64 { padding-top: 64px; padding-bottom: 64px; }
+.seccion-72 { padding-top: 72px; padding-bottom: 72px; }
+.seccion-80 { padding-top: 80px; padding-bottom: 80px; }
+.pila, .pila-4, .pila-8, .pila-10, .pila-12, .pila-18, .pila-20, .pila-22, .pila-28 { display: flex; flex-direction: column; }
+.pila { gap: 18px; }
+.pila-4 { gap: 4px; } .pila-8 { gap: 8px; } .pila-10 { gap: 10px; } .pila-12 { gap: 12px; }
+.pila-18 { gap: 18px; } .pila-20 { gap: 20px; } .pila-22 { gap: 22px; } .pila-28 { gap: 28px; }
+.fila { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.fila-mini { display: inline-flex; align-items: center; gap: 8px; }
+.fila-entre { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 12px; }
+.dos-columnas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.centrado { text-align: center; align-items: center; }
+.fondo-profundo { background: var(--profundo); }
+.fondo-hueso { background: var(--hueso); color: var(--fondo); }
+.borde-arriba { border-top: 1px solid #222B28; }
+
+/* ---------- Textos ---------- */
+.titulo-xl, .titulo-xl-2, .titulo-l, .titulo-m, .plan__nombre, .plan__precio, .seguir__precio {
+  font-family: 'Anton', Impact, sans-serif; font-weight: 400; text-transform: uppercase;
+}
+.titulo-xl { font-size: clamp(2.6rem, 11vw, 6rem); line-height: 0.95; overflow-wrap: break-word; hyphens: auto; }
+.titulo-xl-2 { font-size: clamp(2.6rem, 8vw, 4.6rem); line-height: 0.95; }
+.titulo-l { font-size: clamp(2.2rem, 6vw, 3.4rem); line-height: 1; }
+.titulo-m { font-size: clamp(2rem, 5.5vw, 3rem); line-height: 1; }
+.texto-grande { font-size: 19px; line-height: 1.5; color: #C9CFCC; }
+.texto-18 { font-size: 18px; line-height: 1.6; color: #C9CFCC; }
+.texto-17 { font-size: 17px; line-height: 1.55; }
+.texto-14 { font-size: 14px; }
+.claro { color: #D5DCD9; }
+.suave { color: var(--piedra); font-size: 15px; }
+.naranja { color: var(--brasa); }
+.naranja-oscuro { color: var(--brasa-oscura); }
+.etiqueta { font-size: 13px; font-weight: 700; letter-spacing: 0.18em; }
+.mini-titulo { font-size: 13px; font-weight: 700; letter-spacing: 0.16em; color: var(--piedra); }
+#contacto p { font-size: 16px; line-height: 1.55; }
+
+/* ---------- Portada ---------- */
+.portada { position: relative; min-height: 640px; display: flex; flex-direction: column; justify-content: flex-end; background: var(--profundo); overflow: hidden; }
+.portada__foto {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px;
+  color: var(--piedra); font-size: 15px;
+  background: var(--profundo) url('/img/portada.jpg') center / cover no-repeat;
+}
+.portada__caja { position: relative; background: var(--fondo); border-radius: 24px 24px 0 0; padding: 32px 0 40px; }
+.marca { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--piedra); }
+
+/* ---------- Cinta y separador ---------- */
+.cinta-caja { overflow: hidden; background: var(--brasa); color: var(--fondo); padding: 14px 0; border-top: 1px solid var(--fondo); }
+.cinta { display: flex; width: max-content; font-family: 'Anton', Impact, sans-serif; font-size: 22px; letter-spacing: 0.04em; white-space: nowrap; }
+.cinta span { padding-right: 28px; }
+.separador { display: flex; justify-content: center; padding-top: 20px; }
+
+/* ---------- Botones ---------- */
+.btn { display: inline-block; text-decoration: none; font-weight: 700; font-size: 17px; padding: 16px 24px; border-radius: 12px; text-align: center; cursor: pointer; }
+.btn--naranja { background: var(--brasa); color: var(--fondo); }
+.btn--naranja:hover { color: var(--fondo); background: #FF6B3B; }
+.btn--oscuro { background: var(--fondo); color: var(--hueso); }
+.btn--oscuro:hover { color: var(--hueso); }
+.btn--borde { border: 2px solid var(--brasa); color: var(--hueso); padding: 14px 22px; font-size: 16px; }
+.btn--borde:hover { color: var(--hueso); }
+.btn--gris { border: 2px solid var(--linea); color: var(--hueso); font-size: 16px; padding: 12px; }
+.btn--gris:hover { color: var(--hueso); }
+.enlace-oscuro { color: var(--brasa-oscura); font-weight: 700; font-size: 15px; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--brasa); outline-offset: 3px; }
+
+/* ---------- Selectores (planes) ---------- */
+.grupo { margin: 0; padding: 0; border: 0; }
+.grupo legend { font-size: 15px; font-weight: 700; margin-bottom: 10px; padding: 0; }
+.opcion {
+  text-align: left; min-height: 64px; padding: 16px 18px; border-radius: 14px;
+  border: 2px solid var(--linea); background: var(--caja); color: var(--hueso);
+  font-family: inherit; cursor: pointer; display: flex; flex-direction: column; gap: 4px; width: 100%;
+}
+.opcion strong { font-size: 17px; }
+.opcion span { font-size: 14px; color: var(--piedra); }
+.opcion[aria-pressed="true"] { border-color: var(--brasa); background: var(--profundo); }
+.chip {
+  height: 52px; border-radius: 12px; border: 2px solid var(--linea); background: transparent;
+  color: var(--hueso); font-size: 16px; font-weight: 700; font-family: inherit; cursor: pointer;
+}
+.chip[aria-pressed="true"] { background: var(--brasa); border-color: var(--brasa); color: var(--fondo); }
+
+/* ---------- Tarjeta del plan ---------- */
+.plan { background: var(--hueso); color: var(--fondo); border-radius: 20px; padding: 28px 24px; display: flex; flex-direction: column; gap: 16px; }
+.plan__nombre { font-size: 38px; line-height: 1; }
+.plan__frase { font-size: 16px; line-height: 1.55; }
+.plan__precio-fila { display: flex; align-items: baseline; flex-wrap: wrap; gap: 12px; }
+.plan__precio { font-size: 56px; line-height: 1; }
+.plan__nota { font-size: 15px; color: var(--gris-texto); }
+.plan__sub { margin-top: 6px; font-size: 15px; font-weight: 700; }
+.plan__pago { font-size: 13px; color: var(--gris-texto); }
+.plan .btn { margin-top: 6px; }
+.lista-check { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 16px; line-height: 1.45; }
+.lista-check li { display: flex; gap: 10px; }
+.lista-check svg { flex-shrink: 0; margin-top: 2px; }
+.plan.cambia { animation: pop .35s ease; }
+
+/* ---------- Sigue conmigo ---------- */
+.seguir { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; background: var(--fondo); border-radius: 16px; padding: 22px; }
+.seguir__precio { font-size: 44px; line-height: 1; }
+
+/* ---------- Miguel y testimonios ---------- */
+.foto-miguel {
+  height: 420px; border-radius: 20px; display: flex; align-items: center; justify-content: center; text-align: center;
+  color: var(--piedra); font-size: 15px; padding: 24px;
+  background: var(--profundo) url('/img/miguel.jpg') center / cover no-repeat;
+}
+.testimonio { margin: 0; background: #FFFFFF; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+.testimonio blockquote { margin: 0; font-size: 17px; line-height: 1.5; }
+.testimonio figcaption { font-size: 14px; font-weight: 700; color: var(--gris-texto); }
+
+/* ---------- Contacto y pie ---------- */
+.rejilla-contacto { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; }
+.pie { padding-top: 28px; padding-bottom: 36px; display: flex; flex-direction: column; gap: 8px; font-size: 13px; line-height: 1.5; color: var(--piedra); }
+.pie__marca { font-weight: 700; color: var(--hueso); }
+
+/* =========================================================
+   ANIMACIONES
+   ========================================================= */
+@keyframes subir  { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+@keyframes emerge { 0% { transform: translateY(14px); opacity: 0; } 40% { opacity: 1; } 70%, 100% { transform: translateY(0); opacity: 1; } }
+@keyframes flota  { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes zoom   { from { transform: scale(1.08); } to { transform: scale(1); } }
+@keyframes cinta  { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes brillo { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 90, 38, .55); } 60% { box-shadow: 0 0 0 14px rgba(255, 90, 38, 0); } }
+@keyframes linea  { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes pop    { 0% { transform: scale(.98); opacity: .6; } 100% { transform: none; opacity: 1; } }
+
+.a-sube { animation: subir .8s cubic-bezier(.2, .7, .2, 1) both; }
+.d1 { animation-delay: .15s; } .d2 { animation-delay: .3s; } .d3 { animation-delay: .45s; } .d4 { animation-delay: .6s; }
+.a-zoom { animation: zoom 6s ease-out both; }
+.a-emerge { animation: emerge 2.4s cubic-bezier(.2, .7, .2, 1) infinite; }
+.a-flota { display: inline-block; animation: flota 1.6s ease-in-out infinite; }
+.a-brillo { animation: brillo 2.4s ease-out infinite; }
+.a-linea { transform-box: fill-box; transform-origin: center; animation: linea 1s cubic-bezier(.2, .7, .2, 1) both; }
+.cinta { animation: cinta 22s linear infinite; }
+.boton { transition: transform .2s ease, background-color .25s ease, border-color .25s ease, color .25s ease; }
+.boton:hover { transform: translateY(-2px); }
+.boton:active { transform: scale(.97); }
+.tarjeta { transition: transform .25s ease, border-color .25s ease, background-color .25s ease; }
+.tarjeta:hover { transform: translateY(-3px); }
+
+/* Aparecer al bajar: lo activa js/app.js (funciona en todos los navegadores) */
+.js .revela { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1); }
+.js .revela.visible { opacity: 1; transform: none; }
+
+/* Quien tiene activado "reducir movimiento" ve la web quieta */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+  .js .revela { opacity: 1; transform: none; }
+}
