@@ -11,9 +11,17 @@
   <link rel="stylesheet" href="/estilos.css">
 </head>
 <body>
-  <header class="cabecera">
-    <a href="/" aria-label="Volver al inicio"><img src="/logo-emergo.svg" alt="EMERGO" width="150" height="68"></a>
-    <a href="/">Volver a la web</a>
+  <header class="menu">
+    <div class="ancho menu__fila">
+      <a href="/" class="menu__logo" aria-label="EMERGO · Inicio"><img src="/logo-emergo.svg" alt="EMERGO" width="132" height="60"></a>
+      <button type="button" class="menu__boton" aria-expanded="false" aria-controls="menu-enlaces" aria-label="Abrir menú">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <nav class="menu__enlaces" id="menu-enlaces" aria-label="Principal">
+        <a href="/">Inicio</a><a href="/historia">Mi historia</a><a href="/emergo">EMERGO</a><a href="/planes">Planes</a><a href="/comunidad">Comunidad Capo</a><a href="/contacto">Contacto</a>
+        <a href="/contacto" class="menu__cta" data-calendly="llamada" target="_blank" rel="noopener">Reservar llamada</a>
+      </nav>
+    </div>
   </header>
   <main class="error">
     <h1 class="titulo-xl">Aquí no <span class="naranja">hay nada</span></h1>
@@ -21,10 +29,20 @@
     <a href="/" class="btn btn--naranja boton">Volver al inicio</a>
   </main>
   <footer class="borde-arriba">
-    <div class="contenedor pie">
-      <span class="pie__marca">Miguel Ángel · EMERGO · #ModoCapo</span>
-      <nav class="pie__legal" aria-label="Legal"><a href="/aviso-legal">Aviso legal</a><a href="/privacidad">Privacidad</a><span>© 2026 Miguel Ángel</span></nav>
+    <div class="ancho pie">
+      <img src="/logo-emergo.svg" alt="EMERGO" width="140" height="64">
+      <nav class="pie__legal" aria-label="Páginas"><a href="/historia">Mi historia</a><a href="/emergo">EMERGO</a><a href="/planes">Planes</a><a href="/comunidad">Comunidad Capo</a><a href="/contacto">Contacto</a></nav>
+      <span>EMERGO es un programa de entrenamiento y no sustituye el consejo de tu médico, fisioterapeuta u ortopeda. Antes de empezar necesitas su visto bueno.</span>
+      <nav class="pie__legal" aria-label="Legal"><a href="https://instagram.com/miguelangel96sc" target="_blank" rel="noopener">Instagram</a><a href="/aviso-legal">Aviso legal</a><a href="/privacidad">Privacidad</a><span>© 2026 Miguel Ángel · #ModoCapo</span></nav>
     </div>
   </footer>
+
+  <a href="/contacto" class="wa-flotante boton" data-whatsapp="Hola Miguel, CAPO" target="_blank" rel="noopener" aria-label="Escribir a Miguel por WhatsApp">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/><path d="M9 9.5c.3 2 2.5 4.3 4.8 4.8l1-1.1 1.8.8-.4 1.6c-3.5.5-8-3.9-7.5-7.5L10.3 8l.8 1.8z"/></svg>
+    <span>WhatsApp</span>
+  </a>
+
+  <script src="/config.js"></script>
+  <script src="/app.js" defer></script>
 </body>
 </html>

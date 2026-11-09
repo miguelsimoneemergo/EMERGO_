@@ -1,23 +1,8 @@
 // =========================================================
 // Web de Miguel Ángel · EMERGO
+// Los datos de contacto están en config.js.
+// Aquí están los textos que cambian al pulsar botones en la página «Planes».
 // =========================================================
-
-// ---------------------------------------------------------
-// 1. CONTACTO · cambia solo lo que va entre comillas
-// ---------------------------------------------------------
-const CONTACTO = {
-  // Número de WhatsApp: 34 + el móvil, todo junto, sin + ni espacios
-  whatsapp: '34XXXXXXXXX',
-
-  // Enlaces de Calendly (copia el enlace de cada tipo de evento)
-  calendlyLlamada: 'https://calendly.com/TU-USUARIO/llamada-15-min',
-  calendlyPresencial: 'https://calendly.com/TU-USUARIO/sesion-barcelona'
-};
-
-// ---------------------------------------------------------
-// 2. TEXTOS Y PRECIOS que cambian al pulsar los botones
-// Para cambiar un precio o una frase, edita solo lo que va entre comillas.
-// ---------------------------------------------------------
 
 const FRASES = {
   reciente: 'Empezamos muy suave, con la fase Respirar más larga si hace falta. Antes, tu médico tiene que darte el visto bueno.',
@@ -64,72 +49,25 @@ const SEGUIR = {
 // ---------------------------------------------------------
 // A partir de aquí no hace falta tocar nada.
 // ---------------------------------------------------------
+const C = window.CONTACTO || {};
 
-const estado = { nivel: 'protesis', modo: 'online', seguir: '6' };
-
-const ICONO_CHECK =
-  '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C23E12" stroke-width="2.5" ' +
-  'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
-
-function pintarPlan(animar) {
-  const plan = PLANES[estado.modo];
-  document.getElementById('plan-nombre').textContent = plan.nombre;
-  document.getElementById('plan-frase').textContent = FRASES[estado.nivel] + plan.extra;
-  document.getElementById('plan-precio').textContent = plan.precio;
-  document.getElementById('plan-nota').textContent = plan.nota;
-  const botonPlan = document.getElementById('plan-boton');
-  botonPlan.textContent = plan.boton;
-  botonPlan.dataset.calendly = plan.calendly;
-  botonPlan.href = enlaceCalendly(plan.calendly);
-
-  const lista = document.getElementById('plan-incluye');
-  lista.innerHTML = '';
-  plan.incluye.forEach((texto) => {
-    const li = document.createElement('li');
-    li.innerHTML = ICONO_CHECK;
-    li.appendChild(document.createTextNode(texto));
-    lista.appendChild(li);
+// ---------- Menú del móvil ----------
+const menu = document.querySelector('.menu');
+const botonMenu = document.querySelector('.menu__boton');
+if (menu && botonMenu) {
+  botonMenu.addEventListener('click', () => {
+    const abierto = menu.classList.toggle('abierto');
+    botonMenu.setAttribute('aria-expanded', abierto ? 'true' : 'false');
   });
-
-  if (animar) {
-    const tarjeta = document.querySelector('.plan');
-    tarjeta.classList.remove('cambia');
-    void tarjeta.offsetWidth; // reinicia la animación
-    tarjeta.classList.add('cambia');
-  }
 }
-
-function pintarSeguir() {
-  const s = SEGUIR[estado.seguir];
-  document.getElementById('seguir-precio').textContent = s.precio;
-  document.getElementById('seguir-nota').textContent = s.nota;
-}
-
-// Botones de elegir (nivel, modo y seguir)
-document.querySelectorAll('[data-grupo]').forEach((grupo) => {
-  const clave = grupo.dataset.grupo;
-  grupo.querySelectorAll('button[data-valor]').forEach((boton) => {
-    boton.addEventListener('click', () => {
-      estado[clave] = boton.dataset.valor;
-      grupo.querySelectorAll('button[data-valor]').forEach((b) => {
-        b.setAttribute('aria-pressed', b === boton ? 'true' : 'false');
-      });
-      if (clave === 'seguir') pintarSeguir();
-      else pintarPlan(true);
-    });
-  });
-});
-
 
 // ---------- WhatsApp y Calendly ----------
 function enlaceWhatsapp(mensaje) {
-  return 'https://wa.me/' + CONTACTO.whatsapp + '?text=' + encodeURIComponent(mensaje || 'Hola Miguel, CAPO');
+  return 'https://wa.me/' + (C.whatsapp || '') + '?text=' + encodeURIComponent(mensaje || 'Hola Miguel, CAPO');
 }
 function enlaceCalendly(tipo) {
-  return tipo === 'presencial' ? CONTACTO.calendlyPresencial : CONTACTO.calendlyLlamada;
+  return tipo === 'presencial' ? C.calendlyPresencial : C.calendlyLlamada;
 }
-
-// Calendly solo se carga cuando alguien pulsa "Reservar" (la web va más rápida y sin cookies hasta entonces)
 let calendlyCargando = null;
 function cargarCalendly() {
   if (window.Calendly) return Promise.resolve();
@@ -147,12 +85,10 @@ function cargarCalendly() {
   });
   return calendlyCargando;
 }
-
-document.querySelectorAll('[data-whatsapp]').forEach((a) => {
-  a.href = enlaceWhatsapp(a.dataset.whatsapp);
-});
-document.querySelectorAll('[data-calendly]').forEach((a) => {
-  a.href = enlaceCalendly(a.dataset.calendly);
+document.querySelectorAll('[data-whatsapp]').forEach((a) => { a.href = enlaceWhatsapp(a.dataset.whatsapp); });
+document.querySelectorAll('[data-calendly]').forEach((a) => { a.href = enlaceCalendly(a.dataset.calendly); });
+document.querySelectorAll('[data-google]').forEach((a) => {
+  if (C.google) a.href = C.google; else a.remove();
 });
 document.addEventListener('click', (e) => {
   const a = e.target.closest('[data-calendly]');
@@ -161,13 +97,65 @@ document.addEventListener('click', (e) => {
   const url = enlaceCalendly(a.dataset.calendly);
   cargarCalendly()
     .then(() => window.Calendly.initPopupWidget({ url }))
-    .catch(() => window.open(url, '_blank', 'noopener'));   // si falla, abre Calendly en otra pestaña
+    .catch(() => window.open(url, '_blank', 'noopener'));
 });
 
+// ---------- Selector de planes (solo en la página Planes) ----------
+const estado = { nivel: 'protesis', modo: 'online', seguir: '6' };
+const ICONO_CHECK =
+  '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C23E12" stroke-width="2.5" ' +
+  'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+
+function pintarPlan(animar) {
+  const nombre = document.getElementById('plan-nombre');
+  if (!nombre) return;
+  const plan = PLANES[estado.modo];
+  nombre.textContent = plan.nombre;
+  document.getElementById('plan-frase').textContent = FRASES[estado.nivel] + plan.extra;
+  document.getElementById('plan-precio').textContent = plan.precio;
+  document.getElementById('plan-nota').textContent = plan.nota;
+  const botonPlan = document.getElementById('plan-boton');
+  botonPlan.textContent = plan.boton;
+  botonPlan.dataset.calendly = plan.calendly;
+  botonPlan.href = enlaceCalendly(plan.calendly);
+  const lista = document.getElementById('plan-incluye');
+  lista.innerHTML = '';
+  plan.incluye.forEach((texto) => {
+    const li = document.createElement('li');
+    li.innerHTML = ICONO_CHECK;
+    li.appendChild(document.createTextNode(texto));
+    lista.appendChild(li);
+  });
+  if (animar) {
+    const tarjeta = document.querySelector('.plan');
+    tarjeta.classList.remove('cambia');
+    void tarjeta.offsetWidth;
+    tarjeta.classList.add('cambia');
+  }
+}
+function pintarSeguir() {
+  const p = document.getElementById('seguir-precio');
+  if (!p) return;
+  const s = SEGUIR[estado.seguir];
+  p.textContent = s.precio;
+  document.getElementById('seguir-nota').textContent = s.nota;
+}
+document.querySelectorAll('[data-grupo]').forEach((grupo) => {
+  const clave = grupo.dataset.grupo;
+  grupo.querySelectorAll('button[data-valor]').forEach((boton) => {
+    boton.addEventListener('click', () => {
+      estado[clave] = boton.dataset.valor;
+      grupo.querySelectorAll('button[data-valor]').forEach((b) => {
+        b.setAttribute('aria-pressed', b === boton ? 'true' : 'false');
+      });
+      if (clave === 'seguir') pintarSeguir(); else pintarPlan(true);
+    });
+  });
+});
 pintarPlan(false);
 pintarSeguir();
 
-// Hacer aparecer las secciones al bajar
+// ---------- Aparecer al bajar ----------
 const elementos = document.querySelectorAll('.revela');
 if ('IntersectionObserver' in window) {
   const observador = new IntersectionObserver((entradas) => {
@@ -177,7 +165,7 @@ if ('IntersectionObserver' in window) {
         observador.unobserve(entrada.target);
       }
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   elementos.forEach((el) => observador.observe(el));
 } else {
   elementos.forEach((el) => el.classList.add('visible'));

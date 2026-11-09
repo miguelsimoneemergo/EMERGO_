@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://TU-DOMINIO/</loc></url>
-  <url><loc>https://TU-DOMINIO/aviso-legal</loc></url>
-  <url><loc>https://TU-DOMINIO/privacidad</loc></url>
+  <url><loc>https://miguelsimone.es/</loc></url>
+  <url><loc>https://miguelsimone.es/historia</loc></url>
+  <url><loc>https://miguelsimone.es/emergo</loc></url>
+  <url><loc>https://miguelsimone.es/planes</loc></url>
+  <url><loc>https://miguelsimone.es/comunidad</loc></url>
+  <url><loc>https://miguelsimone.es/contacto</loc></url>
+  <url><loc>https://miguelsimone.es/aviso-legal</loc></url>
+  <url><loc>https://miguelsimone.es/privacidad</loc></url>
 </urlset>

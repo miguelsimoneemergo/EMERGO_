@@ -1,50 +1,67 @@
-# Web de Miguel Ángel · EMERGO
+# Web de Miguel Ángel · EMERGO · miguelsimone.es
 
-Web de Miguel Ángel, entrenador personal amputado, y de su programa EMERGO.
-**Todos los archivos están sueltos, sin carpetas**, para que se suban bien desde cualquier navegador (también Safari).
+Web de varias páginas con menú arriba. **Todos los archivos están sueltos, sin carpetas**, para que Safari los suba bien.
+La web **no enseña precios** (decisión de Miguel): se cuentan en la llamada gratis o por WhatsApp.
 
----
+## Cómo actualizar la web que ya tienes (versión con páginas)
 
-## ¿Ya la subiste y se ve sin colores ni diseño?
+1. Descomprime el zip y abre la carpeta `miguel-web`.
+2. **Antes de subir:** si ya habías puesto el WhatsApp o Calendly en el `app.js` de GitHub, cópialos ahora en `config.js` (ver abajo).
+3. En GitHub: **Add file → Upload files**. Pulsa `Cmd + A` en la carpeta y arrastra **todos los archivos**.
+4. **Commit changes** (con «Commit directly to the main branch»).
+5. Espera 1 minuto y abre `miguelsimone.es` en una ventana privada.
 
-Pasa cuando GitHub recibe `index.html` pero no los archivos de estilo. Safari, al arrastrar, a veces no sube las carpetas.
-Esta versión no tiene carpetas, así que se arregla así:
+## Las páginas
 
-1. Entra en tu repositorio de GitHub.
-2. Pulsa **Add file** → **Upload files**.
-3. Abre esta carpeta en tu ordenador, pulsa `Cmd + A` (o `Ctrl + A`) para seleccionar **todos los archivos** y arrástralos.
-4. Pulsa **Commit changes**. Los archivos con el mismo nombre se cambian solos.
-5. Espera 1 minuto en Vercel y recarga la web con `Cmd + Shift + R`.
+| Página | Archivo | Dirección |
+| --- | --- | --- |
+| Inicio | `index.html` | miguelsimone.es |
+| Mi historia | `historia.html` | miguelsimone.es/historia |
+| El programa EMERGO | `emergo.html` | miguelsimone.es/emergo |
+| Planes (con el selector) | `planes.html` | miguelsimone.es/planes |
+| Comunidad Capo | `comunidad.html` | miguelsimone.es/comunidad |
+| Contacto | `contacto.html` | miguelsimone.es/contacto |
+| Aviso legal, Privacidad y error | `aviso-legal.html`, `privacidad.html`, `404.html` | |
 
-Comprueba en GitHub que en la lista principal ves `estilos.css` y `app.js`, junto a `index.html`.
+El menú de arriba sale en todas las páginas. En el móvil se abre con el botón de las tres rayas.
 
----
+## WhatsApp, Calendly y Google: `config.js`
 
-> La web **no enseña precios** (decisión de Miguel): se cuentan en la llamada gratis o por WhatsApp.
+Todo está en **un solo archivo**, `config.js`. Ábrelo en GitHub, pulsa el lápiz y cambia lo que va entre comillas:
 
-## 0. Qué hay en la carpeta
+```js
+whatsapp: '34XXXXXXXXX',          // 34 + el móvil, todo junto
+calendlyLlamada: 'https://calendly.com/...',
+calendlyPresencial: 'https://calendly.com/...',
+google: ''                        // enlace de la ficha de Google (si no hay, déjalo vacío)
+```
 
-| Archivo | Para qué sirve |
+## Fotos
+
+Ya van puestas: `portada.jpg` (la pierna con la prótesis en la máquina) y `miguel.jpg` (Miguel en el gimnasio).
+Para cambiarlas, sube otra foto con **el mismo nombre**. Pásala antes por [squoosh.app](https://squoosh.app) para que pese menos de 400 KB.
+
+## Qué cambiar en cada archivo
+
+| Quiero cambiar… | Archivo |
 | --- | --- |
-| `index.html` | La página principal (todos los textos) |
-| `estilos.css` | Colores, letras y animaciones (las letras van dentro de este archivo) |
-| `app.js` | Textos que cambian al pulsar botones, WhatsApp y Calendly |
-| `aviso-legal.html` y `privacidad.html` | Páginas legales (plantillas para rellenar) |
-| `404.html` | La página que sale si alguien escribe mal una dirección |
-| `logo-emergo.svg` | El logo de arriba |
-| `compartir.jpg` | La imagen que sale al mandar el enlace por WhatsApp |
-| `favicon.svg` y `apple-touch-icon.png` | Iconos de la pestaña y del móvil |
-| `robots.txt` y `sitemap.xml` | Para que Google encuentre la web |
-| `vercel.json` | Ajustes para Vercel (no hace falta tocarlo) |
+| Textos de una página | El `.html` de esa página (busca la frase con `Cmd + F`) |
+| Lo que sale al pulsar los botones de Planes | `app.js` (arriba del todo) |
+| WhatsApp, Calendly o Google | `config.js` |
+| Colores | `estilos.css` (`:root`, arriba) |
+| Horario y gimnasio | `contacto.html` (busca `[horas]` y `[gimnasio o zona]`) |
 
-**Fotos:** cuando las tengas, súbelas con estos nombres exactos, en minúsculas y junto a los demás archivos:
-`portada.jpg` (la grande de arriba, mínimo 1600 px de ancho) y `miguel.jpg` (la de «Hola, soy Miguel»).
-Hazlas más ligeras antes en [squoosh.app](https://squoosh.app) (menos de 400 KB cada una).
-Luego borra en `index.html` los dos textos que empiezan por `[Foto`.
+## Lo que falta rellenar
 
-Para verla en tu ordenador: doble clic en `index.html`.
+- [ ] WhatsApp, Calendly y Google en `config.js`
+- [ ] Horario del chat y gimnasio o zona de Barcelona (`contacto.html`, `planes.html`)
+- [ ] Datos del titular en `aviso-legal.html` y `privacidad.html`, y que los revise un gestor
+- [ ] Testimonios reales de los Capos en `comunidad.html` cuando terminen las 12 semanas
+- [ ] Que Miguel lea y apruebe `historia.html`
 
 ---
+
+## Guía de inicio (si alguna vez hay que empezar de cero)
 
 ## 1. Crear la cuenta de GitHub (5 minutos)
 
@@ -107,8 +124,7 @@ Desde ahora, **cada cambio que guardes en GitHub se publica solo** en un minuto.
 2. En Vercel: tu proyecto → **Settings** → **Domains** → escribe el dominio → **Add**.
 3. Si lo compraste fuera de Vercel, Vercel te enseña unos datos (registros DNS).
    Cópialos tal cual en la web donde lo compraste. Puede tardar unas horas.
-4. Cambia `TU-DOMINIO` por tu dominio real en estos archivos:
-   `index.html` (3 veces), `robots.txt` y `sitemap.xml`.
+4. El dominio miguelsimone.es ya está puesto en todos los archivos.
 
 Antes de comprar el dominio, comprobad que el nombre EMERGO está libre (OEPM, EUIPO e Instagram).
 
