@@ -1,6 +1,5 @@
 // =========================================================
-// DATOS DE MIGUEL · cambia solo lo que va entre comillas
-// (Aquí no hay contraseñas ni claves secretas: todo esto es público y es normal que se vea.)
+// DATOS DE CONTACTO DE MIGUEL · cambia solo lo que va entre comillas
 // =========================================================
 window.CONTACTO = {
   // WhatsApp: 34 + el móvil, todo junto, sin + ni espacios (ejemplo: '34612345678')
@@ -12,12 +11,5 @@ window.CONTACTO = {
   calendlyPresencial: 'https://calendly.com/miguelsimoneemergo/30min',
 
   // Ficha de Google de Miguel (para «Ver todas en Google»). Déjalo vacío si aún no existe.
-  google: '',
-
-  // Google Analytics 4: el «ID de medición», empieza por G- (ejemplo: 'G-ABC123XYZ9').
-  // Solo se activa si la persona acepta las cookies de análisis. Déjalo vacío para no usarlo.
-  googleAnalytics: '',
-
-  // Vercel Web Analytics (sin cookies). Pon true solo si lo has activado en Vercel → Analytics.
-  vercelAnalytics: false
+  google: ''
 };
