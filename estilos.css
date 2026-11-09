@@ -176,6 +176,18 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--brasa); outline
 .cabecera a { font-weight: 700; }
 .error { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 18px; padding: 24px; }
 
+/* ---------- Botón flotante de WhatsApp ---------- */
+.wa-flotante {
+  position: fixed; right: 16px; bottom: 16px; z-index: 50;
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--brasa); color: var(--fondo); text-decoration: none;
+  font-weight: 800; font-size: 15px; padding: 12px 16px 12px 14px; border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+}
+.wa-flotante:hover { color: var(--fondo); }
+@media (max-width: 420px) { .wa-flotante span { display: none; } .wa-flotante { padding: 14px; } }
+footer .pie { padding-bottom: 96px; }
+
 /* =========================================================
    ANIMACIONES
    ========================================================= */
