@@ -1,8 +1,23 @@
 // =========================================================
 // Web de Miguel Ángel · EMERGO
-// Aquí están los textos y precios que cambian al pulsar los botones.
-// Para cambiar un precio o una frase, edita solo lo que va entre comillas.
 // =========================================================
+
+// ---------------------------------------------------------
+// 1. CONTACTO · cambia solo lo que va entre comillas
+// ---------------------------------------------------------
+const CONTACTO = {
+  // Número de WhatsApp: 34 + el móvil, todo junto, sin + ni espacios
+  whatsapp: '34XXXXXXXXX',
+
+  // Enlaces de Calendly (copia el enlace de cada tipo de evento)
+  calendlyLlamada: 'https://calendly.com/TU-USUARIO/llamada-15-min',
+  calendlyPresencial: 'https://calendly.com/TU-USUARIO/sesion-barcelona'
+};
+
+// ---------------------------------------------------------
+// 2. TEXTOS Y PRECIOS que cambian al pulsar los botones
+// Para cambiar un precio o una frase, edita solo lo que va entre comillas.
+// ---------------------------------------------------------
 
 const FRASES = {
   reciente: 'Empezamos muy suave, con la fase Respirar más larga si hace falta. Antes, tu médico tiene que darte el visto bueno.',
@@ -14,8 +29,8 @@ const PLANES = {
   online: {
     nombre: 'EMERGO · 12 semanas online',
     extra: '',
-    precio: '300 €',
-    nota: 'Plaza de fundador (10 plazas). Después, 450 €',
+    precio: '10 plazas',
+    nota: 'De fundador. El precio te lo cuento en la llamada gratis.',
     incluye: [
       'Plan adaptado a tu cuerpo, con vídeo de cada ejercicio',
       'Revisión cada domingo y mi respuesta cada lunes',
@@ -23,25 +38,27 @@ const PLANES = {
       'Corrección de técnica por vídeo',
       'Chat de lunes a viernes y comunidad Capo'
     ],
-    boton: 'Quiero mi plaza'
+    boton: 'Reservar llamada para mi plaza',
+    calendly: 'llamada'
   },
   presencial: {
     nombre: 'Sesión en persona · Barcelona',
     extra: ' En persona vemos juntos tu técnica y tu forma de moverte.',
-    precio: '[50–70 €]',
-    nota: 'Por sesión de [duración]',
+    precio: 'Tú y yo',
+    nota: 'Sesión en persona. Precio y horarios, en la llamada gratis.',
     incluye: [
       'Entreno conmigo en [gimnasio o zona]',
       'Revisión de técnica y de cómo caminas',
       'Consejos para entrenar solo en casa o en el gimnasio'
     ],
-    boton: 'Reservar una sesión'
+    boton: 'Reservar una sesión',
+    calendly: 'presencial'
   }
 };
 
 const SEGUIR = {
-  '6': { precio: '550 €', nota: '6 meses de seguimiento · después, 750 €' },
-  '12': { precio: '1.000 €', nota: '1 año de seguimiento · después, 1.400 €' }
+  '6': { precio: '6 meses', nota: 'Seguimiento semanal y nuevos retos. Pregúntame el precio por WhatsApp.' },
+  '12': { precio: '1 año', nota: 'Un año entero subiendo conmigo. Pregúntame el precio por WhatsApp.' }
 };
 
 // ---------------------------------------------------------
@@ -60,7 +77,10 @@ function pintarPlan(animar) {
   document.getElementById('plan-frase').textContent = FRASES[estado.nivel] + plan.extra;
   document.getElementById('plan-precio').textContent = plan.precio;
   document.getElementById('plan-nota').textContent = plan.nota;
-  document.getElementById('plan-boton').textContent = plan.boton;
+  const botonPlan = document.getElementById('plan-boton');
+  botonPlan.textContent = plan.boton;
+  botonPlan.dataset.calendly = plan.calendly;
+  botonPlan.href = enlaceCalendly(plan.calendly);
 
   const lista = document.getElementById('plan-incluye');
   lista.innerHTML = '';
@@ -98,6 +118,50 @@ document.querySelectorAll('[data-grupo]').forEach((grupo) => {
       else pintarPlan(true);
     });
   });
+});
+
+
+// ---------- WhatsApp y Calendly ----------
+function enlaceWhatsapp(mensaje) {
+  return 'https://wa.me/' + CONTACTO.whatsapp + '?text=' + encodeURIComponent(mensaje || 'Hola Miguel, CAPO');
+}
+function enlaceCalendly(tipo) {
+  return tipo === 'presencial' ? CONTACTO.calendlyPresencial : CONTACTO.calendlyLlamada;
+}
+
+// Calendly solo se carga cuando alguien pulsa "Reservar" (la web va más rápida y sin cookies hasta entonces)
+let calendlyCargando = null;
+function cargarCalendly() {
+  if (window.Calendly) return Promise.resolve();
+  if (calendlyCargando) return calendlyCargando;
+  calendlyCargando = new Promise((ok, mal) => {
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = 'https://assets.calendly.com/assets/external/widget.css';
+    document.head.appendChild(css);
+    const js = document.createElement('script');
+    js.src = 'https://assets.calendly.com/assets/external/widget.js';
+    js.onload = ok;
+    js.onerror = mal;
+    document.head.appendChild(js);
+  });
+  return calendlyCargando;
+}
+
+document.querySelectorAll('[data-whatsapp]').forEach((a) => {
+  a.href = enlaceWhatsapp(a.dataset.whatsapp);
+});
+document.querySelectorAll('[data-calendly]').forEach((a) => {
+  a.href = enlaceCalendly(a.dataset.calendly);
+});
+document.addEventListener('click', (e) => {
+  const a = e.target.closest('[data-calendly]');
+  if (!a) return;
+  e.preventDefault();
+  const url = enlaceCalendly(a.dataset.calendly);
+  cargarCalendly()
+    .then(() => window.Calendly.initPopupWidget({ url }))
+    .catch(() => window.open(url, '_blank', 'noopener'));   // si falla, abre Calendly en otra pestaña
 });
 
 pintarPlan(false);

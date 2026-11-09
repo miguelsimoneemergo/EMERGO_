@@ -20,13 +20,15 @@ Comprueba en GitHub que en la lista principal ves `estilos.css` y `app.js`, junt
 
 ---
 
+> La web **no enseña precios** (decisión de Miguel): se cuentan en la llamada gratis o por WhatsApp.
+
 ## 0. Qué hay en la carpeta
 
 | Archivo | Para qué sirve |
 | --- | --- |
 | `index.html` | La página principal (todos los textos) |
 | `estilos.css` | Colores, letras y animaciones (las letras van dentro de este archivo) |
-| `app.js` | Precios y textos que cambian al pulsar botones |
+| `app.js` | Textos que cambian al pulsar botones, WhatsApp y Calendly |
 | `aviso-legal.html` y `privacidad.html` | Páginas legales (plantillas para rellenar) |
 | `404.html` | La página que sale si alguien escribe mal una dirección |
 | `logo-emergo.svg` | El logo de arriba |
@@ -113,14 +115,50 @@ Antes de comprar el dominio, comprobad que el nombre EMERGO está libre (OEPM, E
 ## 5. Rellenar lo que falta (antes de enseñarla)
 
 - [ ] Fotos `portada.jpg` y `miguel.jpg`, y borrar los textos `[Foto …]` de `index.html`
-- [ ] Número de WhatsApp: cambia `34XXXXXXXXX` en `index.html` (34 + móvil, sin espacios ni +)
+- [ ] WhatsApp y enlaces de Calendly: arriba del todo de `app.js` (mira «Conectar Calendly y WhatsApp»)
 - [ ] Horario del chat y gimnasio o zona de Barcelona (en `index.html`)
-- [ ] Precio y duración de la sesión en persona (en `app.js`)
-- [ ] Formas de pago (en `index.html`)
+- [ ] Duración y horarios de la sesión en persona, si se quieren poner (en `app.js`)
 - [ ] Enlace a la ficha de Google: cambia el `#` de «Ver todas en Google» (en `index.html`)
 - [ ] Datos del titular en `aviso-legal.html` y `privacidad.html`, y que los revise un gestor o abogado
 - [ ] Testimonios reales de los Capos (cuando terminen las 12 semanas)
 - [ ] Poner el enlace de la web en la bio de Instagram
+
+## Conectar Calendly y WhatsApp
+
+Todo se cambia en **un solo sitio**: arriba del todo de `app.js`, en el bloque `CONTACTO`.
+
+```js
+const CONTACTO = {
+  whatsapp: '34XXXXXXXXX',
+  calendlyLlamada: 'https://calendly.com/TU-USUARIO/llamada-15-min',
+  calendlyPresencial: 'https://calendly.com/TU-USUARIO/sesion-barcelona'
+};
+```
+
+**WhatsApp**
+- Cambia `34XXXXXXXXX` por `34` + el móvil de Miguel, todo junto (ejemplo: `34612345678`).
+- Lo usan el botón redondo naranja que flota abajo a la derecha, «Escríbeme por WhatsApp», «Quiero seguir» y el de contacto.
+  Cada botón abre WhatsApp con un mensaje ya escrito.
+- Consejo: usad **WhatsApp Business** (gratis) para tener mensaje de bienvenida y horario de respuesta automático.
+
+**Calendly** (para que la gente reserve sola la llamada o la sesión)
+1. Crea una cuenta en [calendly.com](https://calendly.com) con el correo de Miguel y conecta su calendario (Google o iCloud).
+2. Crea un tipo de evento: **Llamada EMERGO · 15 min**, por videollamada (Google Meet o Zoom) o por teléfono.
+   - Añade una pregunta: «¿En qué situación estás ahora?» y otra con su WhatsApp.
+   - En disponibilidad, pon solo las horas en que Miguel puede atender.
+3. Si quieres, crea otro: **Sesión en Barcelona**, con la dirección del gimnasio y la duración.
+   Si el plan gratis de Calendly no te deja crear dos, usa el mismo enlace en los dos huecos.
+4. En cada evento pulsa **Copy link** y pégalo en `calendlyLlamada` y `calendlyPresencial`.
+5. Guarda con **Commit changes**. En 1 minuto está en la web.
+
+Qué pasa en la web: al pulsar «Reservar llamada», el calendario de Calendly se abre **encima de la página**,
+sin salir de la web. Si por lo que sea no carga, se abre Calendly en otra pestaña.
+Calendly solo se carga al pulsar el botón, así la web sigue rápida.
+
+Botones que abren Calendly: «Reservar llamada para mi plaza» (plan online), «Reservar una sesión» (plan en persona),
+«Reservar mi llamada gratis» y «Reservar llamada de 15 min».
+
+---
 
 ## 6. Cómo cambiar cosas sin saber programar
 
@@ -130,8 +168,8 @@ Para cambiar una foto: **Add file** → **Upload files** → sube la foto con el
 | Quiero cambiar… | Archivo | Qué buscar |
 | --- | --- | --- |
 | Un título o un texto | `index.html` | La frase tal cual |
-| Un precio o lo que incluye un plan | `app.js` | Arriba del todo, entre comillas |
-| El WhatsApp | `index.html` | `34XXXXXXXXX` |
+| Lo que incluye un plan o sus frases | `app.js` | Arriba del todo, entre comillas |
+| El WhatsApp o Calendly | `app.js` | `CONTACTO`, arriba del todo |
 | Un color | `estilos.css` | `:root`, arriba del todo |
 | La imagen al compartir | `compartir.jpg` | Sube otra con el mismo nombre (1200 × 630 px) |
 
@@ -145,7 +183,8 @@ Truco: con el archivo abierto en GitHub, pulsa `Ctrl + F` (o `Cmd + F` en Mac) p
 | Vercel dice «404» en la web | `index.html` está dentro de otra carpeta. En Vercel, entra en **Settings** del proyecto, busca **Root Directory**, escribe `miguel-web`, guarda y vuelve a publicar |
 | No se ven las fotos | Revisa que se llamen exactamente `portada.jpg` y `miguel.jpg`, en minúsculas |
 | Cambié algo y no se ve | Espera 1 minuto y recarga con `Ctrl + Shift + R` (o `Cmd + Shift + R`) |
-| WhatsApp no abre el chat | El número debe ir así: `34612345678`, sin `+`, sin espacios |
+| WhatsApp no abre el chat | En `app.js`, el número debe ir así: `34612345678`, sin `+`, sin espacios |
+| Calendly sale en blanco o da error | Revisa que el enlace de `app.js` sea el de **Copy link** del evento y empiece por `https://calendly.com/` |
 
 ## 8. Qué tiene la web
 

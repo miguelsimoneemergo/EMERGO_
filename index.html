@@ -100,13 +100,12 @@
       <h3 class="plan__nombre" id="plan-nombre">EMERGO · 12 semanas online</h3>
       <p class="plan__frase" id="plan-frase">Te enseño a entrenar todo el cuerpo con la prótesis, paso a paso y sin miedo al gimnasio.</p>
       <div class="plan__precio-fila">
-        <span class="plan__precio" id="plan-precio">300 €</span>
-        <span class="plan__nota" id="plan-nota">Plaza de fundador (10 plazas). Después, 450 €</span>
+        <span class="plan__precio" id="plan-precio">10 plazas</span>
+        <span class="plan__nota" id="plan-nota">De fundador. El precio te lo cuento en la llamada gratis.</span>
       </div>
       <h4 class="plan__sub">Qué incluye</h4>
       <ul class="lista-check" id="plan-incluye"></ul>
-      <a href="#contacto" class="btn btn--oscuro boton" id="plan-boton">Quiero mi plaza</a>
-      <p class="plan__pago">Formas de pago: [por definir con Miguel]</p>
+      <a href="#contacto" class="btn btn--oscuro boton" id="plan-boton" data-calendly="llamada" target="_blank" rel="noopener">Reservar llamada para mi plaza</a>
     </article>
   </section>
 
@@ -122,10 +121,10 @@
       </div>
       <div class="seguir revela" aria-live="polite">
         <div class="pila-4">
-          <span class="seguir__precio" id="seguir-precio">550 €</span>
-          <span class="suave texto-14" id="seguir-nota">6 meses de seguimiento · después, 750 €</span>
+          <span class="seguir__precio" id="seguir-precio">6 meses</span>
+          <span class="suave texto-14" id="seguir-nota">Seguimiento semanal y nuevos retos. Pregúntame el precio por WhatsApp.</span>
         </div>
-        <a href="#contacto" class="btn btn--naranja boton">Quiero seguir</a>
+        <a href="#contacto" class="btn btn--naranja boton" data-whatsapp="Hola Miguel, he terminado EMERGO y quiero seguir contigo" target="_blank" rel="noopener">Quiero seguir</a>
       </div>
     </div>
   </section>
@@ -138,7 +137,7 @@
     <h2 class="titulo-l revela">Hola, soy <span class="naranja">Miguel</span></h2>
     <p class="texto-18 revela">En noviembre de 2023 perdí la pierna derecha. Pasé por la UCI, por volver a casa sin poder hacer lo de antes y por odiar el espejo. Volver al gimnasio me cambió la cabeza.</p>
     <p class="texto-18 revela">Hoy soy entrenador personal certificado, estudio Dietética y entreno cada día con mi prótesis. Sé lo que es empezar desde cero, porque lo hice.</p>
-    <a href="#contacto" class="btn btn--borde boton" style="align-self:flex-start">Escríbeme</a>
+    <a href="#contacto" class="btn btn--borde boton" style="align-self:flex-start" data-whatsapp="Hola Miguel, CAPO" target="_blank" rel="noopener">Escríbeme por WhatsApp</a>
   </section>
 
   <!-- ============ 5. TESTIMONIOS ============ -->
@@ -170,7 +169,7 @@
   <section class="contenedor seccion-80 pila-18 centrado">
     <h2 class="titulo-xl-2 revela">Tu cambio empieza <span class="naranja">hoy</span></h2>
     <p class="texto-grande">Primera llamada de 15 minutos sin coste, para ver si EMERGO es para ti.</p>
-    <a href="#contacto" class="btn btn--naranja boton a-brillo">Reservar mi llamada</a>
+    <a href="#contacto" class="btn btn--naranja boton a-brillo" data-calendly="llamada" target="_blank" rel="noopener">Reservar mi llamada gratis</a>
   </section>
 
   <!-- ============ 7. CONTACTO ============ -->
@@ -186,9 +185,10 @@
       </div>
       <div class="pila-10">
         <h3 class="mini-titulo">ESCRÍBEME</h3>
-        <p>Pregúntame por horarios, precios o tu primera llamada.</p>
-        <!-- WHATSAPP: cambia 34XXXXXXXXX por el número de Miguel (34 + su móvil, sin espacios ni +) -->
-        <a href="https://wa.me/34XXXXXXXXX?text=Hola%20Miguel%2C%20CAPO" class="btn btn--naranja boton" target="_blank" rel="noopener">WhatsApp</a>
+        <p>Reserva tu llamada gratis o pregúntame lo que quieras por WhatsApp.</p>
+        <!-- El número de WhatsApp y los enlaces de Calendly se cambian arriba del todo en app.js -->
+        <a href="#contacto" class="btn btn--naranja boton" data-calendly="llamada" target="_blank" rel="noopener">Reservar llamada de 15 min</a>
+        <a href="#contacto" class="btn btn--gris boton" data-whatsapp="Hola Miguel, CAPO" target="_blank" rel="noopener">WhatsApp</a>
         <a href="https://instagram.com/miguelangel96sc" class="btn btn--gris boton" target="_blank" rel="noopener">Instagram @miguelangel96sc</a>
       </div>
     </div>
@@ -201,6 +201,12 @@
       <nav class="pie__legal" aria-label="Legal"><a href="/aviso-legal">Aviso legal</a><a href="/privacidad">Privacidad</a><span>© 2026 Miguel Ángel</span></nav>
     </div>
   </footer>
+
+  <!-- Botón flotante de WhatsApp -->
+  <a href="#contacto" class="wa-flotante boton" data-whatsapp="Hola Miguel, CAPO" target="_blank" rel="noopener" aria-label="Escribir a Miguel por WhatsApp">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/><path d="M9 9.5c.3 2 2.5 4.3 4.8 4.8l1-1.1 1.8.8-.4 1.6c-3.5.5-8-3.9-7.5-7.5L10.3 8l.8 1.8z"/></svg>
+    <span>WhatsApp</span>
+  </a>
 
   <script src="/app.js" defer></script>
 </body>
