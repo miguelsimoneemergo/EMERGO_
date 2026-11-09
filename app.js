@@ -23,7 +23,7 @@ const PLANES = {
       'Corrección de técnica por vídeo',
       'Chat de lunes a viernes y comunidad Capo'
     ],
-    boton: 'Reservar llamada para mi plaza',
+    boton: 'Reservar llamada gratis',
     calendly: 'llamada'
   },
   presencial: {
@@ -36,7 +36,7 @@ const PLANES = {
       'Revisión de técnica y de cómo caminas',
       'Consejos para entrenar solo en casa o en el gimnasio'
     ],
-    boton: 'Reservar una sesión',
+    boton: 'Reservar llamada gratis',
     calendly: 'presencial'
   }
 };
@@ -95,10 +95,99 @@ document.addEventListener('click', (e) => {
   if (!a) return;
   e.preventDefault();
   const url = enlaceCalendly(a.dataset.calendly);
+  const permiso = leerConsentimiento();
+  if (!permiso || !permiso.externo) { window.open(url, '_blank', 'noopener'); return; }   // sin permiso: Calendly en otra pestaña
   cargarCalendly()
     .then(() => window.Calendly.initPopupWidget({ url }))
     .catch(() => window.open(url, '_blank', 'noopener'));
 });
+
+
+// ---------- Cookies y analítica ----------
+// Guardamos la elección en este navegador. Versión 1 del texto del banner.
+const CLAVE_COOKIES = 'emergo-cookies-v1';
+function leerConsentimiento() {
+  try { return JSON.parse(localStorage.getItem(CLAVE_COOKIES)); } catch (e) { return null; }
+}
+function guardarConsentimiento(analitica, externo) {
+  const datos = { analitica: !!analitica, externo: !!externo, fecha: new Date().toISOString() };
+  try { localStorage.setItem(CLAVE_COOKIES, JSON.stringify(datos)); } catch (e) {}
+  aplicarConsentimiento(datos);
+  return datos;
+}
+let gaCargado = false;
+function cargarGoogleAnalytics() {
+  if (gaCargado || !C.googleAnalytics || !/^G-[A-Z0-9]+$/.test(C.googleAnalytics)) return;
+  gaCargado = true;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { window.dataLayer.push(arguments); };
+  window.gtag('js', new Date());
+  window.gtag('config', C.googleAnalytics);
+  const s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(C.googleAnalytics);
+  document.head.appendChild(s);
+}
+function aplicarConsentimiento(datos) {
+  if (datos && datos.analitica) cargarGoogleAnalytics();
+}
+if (C.vercelAnalytics) {
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  const v = document.createElement('script');
+  v.defer = true;
+  v.src = '/_vercel/insights/script.js';
+  document.head.appendChild(v);
+}
+
+function crearBanner() {
+  const caja = document.createElement('section');
+  caja.className = 'cookies';
+  caja.setAttribute('role', 'dialog');
+  caja.setAttribute('aria-live', 'polite');
+  caja.setAttribute('aria-labelledby', 'cookies-titulo');
+  caja.innerHTML =
+    '<h2 id="cookies-titulo">Tu privacidad</h2>' +
+    '<p>Uso cookies propias para recordar tu elección y, si aceptas, cookies de análisis para saber qué páginas se visitan, y el calendario de Calendly dentro de la web. Lee la <a href="/cookies">política de cookies</a>.</p>' +
+    '<div class="cookies__opciones" hidden>' +
+      '<label class="cookies__opcion"><input type="checkbox" checked disabled> <b>Necesarias<span>Guardan tu elección. Siempre activas.</span></b></label>' +
+      '<label class="cookies__opcion"><input type="checkbox" id="ck-analitica"> <b>Análisis<span>Google Analytics: visitas y páginas más vistas, sin identificarte.</span></b></label>' +
+      '<label class="cookies__opcion"><input type="checkbox" id="ck-externo"> <b>Contenido externo<span>Abre el calendario de Calendly dentro de la web. Si no, se abre en otra pestaña.</span></b></label>' +
+      '<button type="button" class="cookies__guardar" data-ck="guardar">Guardar mi elección</button>' +
+    '</div>' +
+    '<div class="cookies__botones">' +
+      '<button type="button" data-ck="rechazar">Rechazar</button>' +
+      '<button type="button" class="cookies__alt" data-ck="configurar">Configurar</button>' +
+      '<button type="button" data-ck="aceptar">Aceptar todo</button>' +
+    '</div>';
+  document.body.appendChild(caja);
+  const opciones = caja.querySelector('.cookies__opciones');
+  caja.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-ck]');
+    if (!b) return;
+    const accion = b.dataset.ck;
+    if (accion === 'configurar') {
+      const previo = leerConsentimiento() || {};
+      caja.querySelector('#ck-analitica').checked = !!previo.analitica;
+      caja.querySelector('#ck-externo').checked = !!previo.externo;
+      opciones.hidden = !opciones.hidden;
+      return;
+    }
+    if (accion === 'aceptar') guardarConsentimiento(true, true);
+    if (accion === 'rechazar') guardarConsentimiento(false, false);
+    if (accion === 'guardar') guardarConsentimiento(caja.querySelector('#ck-analitica').checked, caja.querySelector('#ck-externo').checked);
+    caja.hidden = true;
+  });
+  return caja;
+}
+let banner = null;
+function mostrarBanner(abrirOpciones) {
+  if (!banner) banner = crearBanner();
+  banner.hidden = false;
+  if (abrirOpciones) banner.querySelector('[data-ck="configurar"]').click();
+}
+const consentimiento = leerConsentimiento();
+if (consentimiento) aplicarConsentimiento(consentimiento); else mostrarBanner(false);
+document.querySelectorAll('[data-abrir-cookies]').forEach((b) => b.addEventListener('click', () => mostrarBanner(true)));
 
 // ---------- Selector de planes (solo en la página Planes) ----------
 const estado = { nivel: 'protesis', modo: 'online', seguir: '6' };

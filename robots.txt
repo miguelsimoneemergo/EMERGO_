@@ -1,4 +1,6 @@
+# miguelsimone.es
 User-agent: *
 Allow: /
+Disallow: /404
 
 Sitemap: https://miguelsimone.es/sitemap.xml

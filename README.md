@@ -11,6 +11,28 @@ La web **no enseña precios** (decisión de Miguel): se cuentan en la llamada gr
 4. **Commit changes** (con «Commit directly to the main branch»).
 5. Espera 1 minuto y abre `miguelsimone.es` en una ventana privada.
 
+## Novedades del 9 de noviembre (revisión completa)
+
+- **Páginas legales:** `privacidad.html`, `terminos.html` (términos y condiciones) y `cookies.html`, enlazadas en el pie. Son plantillas: rellena los [corchetes] y que las revise un gestor.
+- **Banner de cookies:** sale la primera vez, con «Rechazar», «Configurar» y «Aceptar todo» igual de visibles. La elección se puede cambiar en «Configurar cookies», en el pie.
+- **Analítica:** Google Analytics solo se activa si la persona acepta. Para activarlo, mira «Activar Google Analytics» más abajo.
+- **Seguridad:** `vercel.json` obliga a usar https (HSTS) y añade cabeceras de seguridad. En la web no hay claves ni contraseñas.
+- **Velocidad:** letras e imágenes en archivos aparte (`.woff2` y `.webp`); la página pesa mucho menos.
+- **Un solo botón principal en toda la web:** «Reservar llamada gratis». WhatsApp queda como opción secundaria.
+
+### Activar Google Analytics
+1. Entra en [analytics.google.com](https://analytics.google.com) con la cuenta de Google de Miguel → **Empezar a medir**.
+2. Crea una cuenta «EMERGO» y una propiedad «miguelsimone.es» (zona horaria España, moneda euro).
+3. Elige **Web**, escribe `miguelsimone.es` y copia el **ID de medición** (empieza por `G-`).
+4. En GitHub, abre `config.js`, pega el ID en `googleAnalytics: 'G-…'` y pulsa **Commit changes**.
+5. En Analytics → **Administrar** → **Recogida y conservación de datos** → **Conservación de datos**, elige 14 meses.
+
+Alternativa sin cookies: en Vercel → tu proyecto → **Analytics** → **Enable**, y en `config.js` pon `vercelAnalytics: true`.
+
+### Si el calendario de Calendly no se abre dentro de la web
+La web lleva una protección (Content-Security-Policy) que solo deja cargar lo que conocemos. Si Calendly cambia algo y deja de abrirse,
+abre `vercel.json` en GitHub, borra el bloque de la línea que empieza por `"key": "Content-Security-Policy"` y guarda. Avísame y lo ajusto.
+
 ## Las páginas
 
 | Página | Archivo | Dirección |
@@ -21,7 +43,8 @@ La web **no enseña precios** (decisión de Miguel): se cuentan en la llamada gr
 | Planes (con el selector) | `planes.html` | miguelsimone.es/planes |
 | Comunidad Capo | `comunidad.html` | miguelsimone.es/comunidad |
 | Contacto | `contacto.html` | miguelsimone.es/contacto |
-| Aviso legal, Privacidad y error | `aviso-legal.html`, `privacidad.html`, `404.html` | |
+| Aviso legal, Privacidad, Términos, Cookies | `aviso-legal.html`, `privacidad.html`, `terminos.html`, `cookies.html` | /aviso-legal, /privacidad, /terminos, /cookies |
+| Página de error | `404.html` | sale sola si una dirección no existe |
 
 El menú de arriba sale en todas las páginas. En el móvil se abre con el botón de las tres rayas.
 
@@ -38,8 +61,8 @@ google: ''                        // enlace de la ficha de Google (si no hay, d�
 
 ## Fotos
 
-Ya van puestas: `portada.jpg` (la pierna con la prótesis en la máquina) y `miguel.jpg` (Miguel en el gimnasio).
-Para cambiarlas, sube otra foto con **el mismo nombre**. Pásala antes por [squoosh.app](https://squoosh.app) para que pese menos de 400 KB.
+Ya van puestas: `portada` (la pierna con la prótesis) y `miguel` (Miguel en el gimnasio), cada una en `.jpg` y en `.webp` (más ligera, en dos tamaños).
+Para cambiar una foto, pídemelo y te preparo todas sus versiones, o sube la nueva con el mismo nombre `.jpg` y borra sus `.webp`.
 
 ## Qué cambiar en cada archivo
 
