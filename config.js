@@ -3,9 +3,9 @@
 // (Aquí no hay contraseñas ni claves secretas: todo esto es público y es normal que se vea.)
 // =========================================================
 window.CONTACTO = {
-  // WhatsApp: el enlace de WhatsApp Business de Miguel.
-  // (También vale el número: 34 + el móvil, todo junto, por ejemplo '34612345678'.)
-  whatsapp: 'https://wa.me/message/F4ELK5GP36Z2O1',
+  // WhatsApp de Miguel: 34 + el móvil, todo junto, sin + ni espacios.
+  // Abre el chat directamente con el mensaje ya escrito.
+  whatsapp: '34633531675',
 
   // Enlaces de Calendly (en Calendly: tu evento → Copy link).
   // De momento los dos usan la misma llamada de 30 min. Si Miguel crea un evento para la sesión en Barcelona, pon su enlace en calendlyPresencial.
