@@ -63,7 +63,10 @@ if (menu && botonMenu) {
 
 // ---------- WhatsApp y Calendly ----------
 function enlaceWhatsapp(mensaje) {
-  return 'https://wa.me/' + (C.whatsapp || '') + '?text=' + encodeURIComponent(mensaje || 'Hola Miguel, CAPO');
+  const w = (C.whatsapp || '').trim();
+  // Enlace corto de WhatsApp Business (wa.me/message/...): se usa tal cual, con su mensaje de bienvenida.
+  if (/^https?:\/\//.test(w)) return w;
+  return 'https://wa.me/' + w + '?text=' + encodeURIComponent(mensaje || 'Hola Miguel, CAPO');
 }
 function enlaceCalendly(tipo) {
   return tipo === 'presencial' ? C.calendlyPresencial : C.calendlyLlamada;
