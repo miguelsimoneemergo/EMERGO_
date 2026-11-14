@@ -6,19 +6,18 @@ window.CONTACTO = {
   // WhatsApp de Miguel: 34 + el móvil, todo junto, sin + ni espacios.
   // Abre el chat directamente con el mensaje ya escrito.
   whatsapp: '34633531675',
-mensajeWhatsapp: '¡Hola Miguel! Soy \n\nQuiero dar el paso y empezar a entrenar contigo. Te cuento qué quiero conseguir y en qué punto estoy ahora:
+  mensajeWhatsapp: '¡Hola Miguel! Soy \n\nQuiero dar el paso y empezar a entrenar contigo. Te cuento qué quiero conseguir y en qué punto estoy ahora:',
+
   // Enlaces de Calendly (en Calendly: tu evento → Copy link).
-  // De momento los dos usan la misma llamada de 30 min. Si Miguel crea un evento para la sesión en Barcelona, pon su enlace en calendlyPresencial.
   calendlyLlamada: 'https://calendly.com/miguelsimoneemergo/30min',
   calendlyPresencial: 'https://calendly.com/miguelsimoneemergo/30min',
 
-  // Ficha de Google de Miguel (para «Ver todas en Google»). Déjalo vacío si aún no existe.
+  // Ficha de Google de Miguel. Déjalo vacío si aún no existe.
   google: '',
 
-  // Google Analytics 4: el «ID de medición», empieza por G- (ejemplo: 'G-ABC123XYZ9').
-  // Solo se activa si la persona acepta las cookies de análisis. Déjalo vacío para no usarlo.
+  // Google Analytics 4 (empieza por G-). Déjalo vacío para no usarlo.
   googleAnalytics: '',
 
-  // Vercel Web Analytics (sin cookies). Pon true solo si lo has activado en Vercel → Analytics.
+  // Vercel Web Analytics. Pon true solo si lo has activado en Vercel.
   vercelAnalytics: false
 };
