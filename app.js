@@ -32,7 +32,7 @@ const PLANES = {
     precio: 'Tú y yo',
     nota: 'Sesión en persona. Precio y horarios, en la llamada gratis.',
     incluye: [
-      'Entreno conmigo en [gimnasio o zona]',
+      'Entreno conmigo en Barcelona',
       'Revisión de técnica y de cómo caminas',
       'Consejos para entrenar solo en casa o en el gimnasio'
     ],
@@ -88,7 +88,7 @@ function cargarCalendly() {
   });
   return calendlyCargando;
 }
-document.querySelectorAll('[data-whatsapp]').forEach((a) => { a.href = enlaceWhatsapp(a.dataset.whatsapp); });
+document.querySelectorAll('[data-whatsapp]').forEach((a) => { const m = a.dataset.whatsapp; a.href = enlaceWhatsapp(m === 'Hola Miguel, CAPO' && !location.pathname.startsWith('/comunidad') && C.mensajeWhatsapp ? C.mensajeWhatsapp : m); });
 document.querySelectorAll('[data-calendly]').forEach((a) => { a.href = enlaceCalendly(a.dataset.calendly); });
 document.querySelectorAll('[data-google]').forEach((a) => {
   if (C.google) a.href = C.google; else a.remove();
