@@ -6,7 +6,7 @@ window.CONTACTO = {
   // WhatsApp de Miguel: 34 + el móvil, todo junto, sin + ni espacios.
   // Abre el chat directamente con el mensaje ya escrito.
   whatsapp: '34633531675',
-
+mensajeWhatsapp: '¡Hola Miguel! Soy \n\nQuiero dar el paso y empezar a entrenar contigo. Te cuento qué quiero conseguir y en qué punto estoy ahora:
   // Enlaces de Calendly (en Calendly: tu evento → Copy link).
   // De momento los dos usan la misma llamada de 30 min. Si Miguel crea un evento para la sesión en Barcelona, pon su enlace en calendlyPresencial.
   calendlyLlamada: 'https://calendly.com/miguelsimoneemergo/30min',
